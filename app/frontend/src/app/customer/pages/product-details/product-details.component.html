@@ -1,0 +1,83 @@
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+
+<div *ngIf="product; else divLoading" class="grid p-2">
+
+  <mat-card class="col-12 sm:col-6">
+
+    <mat-card-header>
+      <mat-card-title>{{ product.name | titlecase }}</mat-card-title>
+      <mat-card-subtitle *ngIf="product.stock > 5; else pocasUnidades" style="color: green">Disponible</mat-card-subtitle>
+      <ng-template #pocasUnidades>
+        <mat-card-subtitle style="color: red">Pocas unidades</mat-card-subtitle>
+      </ng-template>
+    </mat-card-header>
+
+
+    <img mat-card-image [src]="product | productImage" [alt]="product.name">
+
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+
+    <mat-card-header>
+      <mat-card-title>Información</mat-card-title>
+      <mat-card-subtitle>{{ product.name | titlecase }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item><strong>Descripcion:</strong> {{ product.description }}</mat-list-item>
+        <mat-list-item><strong>Precio:</strong> {{ product.price | currency: 'GTQ': 'symbol-narrow' }}</mat-list-item>
+        <mat-list-item><strong>Existencias:</strong> {{ product.stock }}</mat-list-item>
+        <strong>Categorias:</strong>
+        <mat-list-item *ngFor="let categorie of product.categories">
+          {{ categorie.name }}
+        </mat-list-item>
+      </mat-list>
+
+
+      <form [formGroup]="miFormulario"
+            autocomplete="off"
+            (ngSubmit)="agregar()"
+            class="formgrid grid">
+        <mat-form-field>
+          <mat-label>Qty</mat-label>
+          <input matInput
+                 type="number"
+                 required
+                 formControlName="existenciaLlevar"
+                 min="1"
+                 [max]="product.stock">
+        </mat-form-field>
+      </form>
+
+    </mat-card-content>
+
+    <div class="flex justify-content-between">
+      <button mat-button
+              mat-raised
+              color="primary"
+              type="submit"
+              [disabled]="miFormulario.invalid"
+              (click)="agregar()">
+        <mat-icon mat-icon>add_shopping_cart</mat-icon>
+          Agregar
+      </button>
+      <div class="spacer"></div>
+      <button mat-button
+              color="warn"
+              (click)="goBack()">
+        Regresar
+      </button>
+    </div>
+  </mat-card>
+
+
+</div>

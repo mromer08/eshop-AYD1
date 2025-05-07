@@ -1,0 +1,64 @@
+<form class="row align-items-center" [formGroup]="productForm">
+    <div class="col-md-3 col-sm-12 p-1">
+        <mat-card class="rounded-4 p-3">
+            <shared-add-photo scale="1.5" [url]="image" (image)="catchImage($event)" />
+        </mat-card>
+    </div>
+    <div class="col-md-7 col-sm-12">
+        <div class="row">
+            <div class="col-md-7 col-sm-12 p-1">
+                <mat-card class="rounded-4 p-3">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>Nombre del Producto</mat-label>
+                            <input matInput type="text" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>Descripción</mat-label>
+                            <textarea matInput cdkTextareaAutosize="false"
+                                formControlName="description"></textarea>
+                        </mat-form-field>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-md-5 col-sm-12 p-1">
+                <mat-card class="rounded-4 p-3">
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>Precio del Producto</mat-label>
+                            <input matInput type="number" formControlName="price">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>Cantidad Disponible</mat-label>
+                            <input matInput type="number" formControlName="stock">
+                        </mat-form-field>
+                    </div>
+                </mat-card>
+            </div>
+            @if (categories().length > 0) {
+                <div class="col-12 p-1">
+                    <mat-card class="rounded-4 p-3">
+                        <h4 class="text-center mb-3">Categorias</h4>
+                        <div class="row">
+                            @for (category of categories(); track $index) {
+                                <mat-checkbox class="col-md-3 col-sm-12" [checked]="hasElement(category._id)" (change)="setProductCat($event, category._id)">{{ category.name }}</mat-checkbox>
+                            }
+                        </div>
+                    </mat-card>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-12 p-1">
+        <mat-card class="d-flex flex-column rounded-4 p-3">
+            <button mat-fab extended outlinedIcon class="mx-auto my-1" (click)="onSubmitProduct()">
+                <mat-icon class="material-icons-outlined">{{ iconMode }}</mat-icon>
+                {{ buttonMode }}
+            </button>
+            <button mat-fab extended outlinedIcon color="warn" class="mx-auto my-1" (click)="onCancel()">
+                <mat-icon class="material-icons-outlined">cancel</mat-icon>
+                Cancelar
+            </button>
+        </mat-card>
+    </div>
+</form>

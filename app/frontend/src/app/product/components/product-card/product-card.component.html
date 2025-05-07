@@ -1,0 +1,31 @@
+<mat-card class="rounded-4 h-100">
+    <mat-card-header>
+        <mat-card-title>
+            {{ product.name }}
+        </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="product.image_url" alt="Product Image" class="img-fluid mx-auto" style="width: 300px;">
+    <mat-card-content class="d-flex flex-column">
+        <p>{{ product.description }}</p>
+        <div class="row my-3">
+            <span class="col-6 text-start fw-bold">Precio:</span>
+            <span class="col-6 text-end fw-bold">{{ product.price | currency: 'Q' }}</span>
+            <span class="col-6 text-start fw-bold">Stock:</span>
+            <span class="col-6 text-end fw-bold">{{ product.stock }}</span>
+        </div>
+        <div class="disabled">
+            @if (product.categories.length !-- 0) {
+                <h3 class="text-center">Categorias</h3>
+                <div class="row disabled">
+                    @for (category of product.categories; track $index) {
+                        <mat-checkbox [checked]="true" class="col-md-6 col-sm-12">{{ category.name }}</mat-checkbox>
+                    }
+                </div>
+            }
+        </div>
+    </mat-card-content>
+    <mat-divider class="mt-auto" />
+    <mat-card-actions>
+        <ng-content class="d-flex justify-content-start align-items-center" select="[actions]"/>
+    </mat-card-actions>
+</mat-card>

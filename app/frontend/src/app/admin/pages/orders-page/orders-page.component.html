@@ -1,0 +1,29 @@
+<h1 class="fw-bold text-center mb-4">Ordenes</h1>
+@if (!isLoading) {
+    <mat-tab-group color="accent" class="shadow">
+        @for (item of status; track $index) {
+            <mat-tab [label]="item">
+                <div class="p-5" style="height: 400px;">
+                    <div class="row">
+                        @for (order of classifyOrders(item); track $index) {
+                            <div class="col-md-4 col-sm-12 p-1">
+                                <shared-order-card [order]="order">
+                                    <div status>
+                                        @if (order.status !== 'Delivered') {
+                                            <button mat-fab extended outlinedIcon [color]="returnColor(item)" (click)="updateStatus(item, order._id)">
+                                                <mat-icon class="material-icons-outlined">{{ returnIcon(item) }}</mat-icon>
+                                                {{ returnAction(item) }}
+                                            </button>
+                                        } @else {
+                                            <mat-icon color="accent" style="transform: scale(2);">fact_check</mat-icon>
+                                        }
+                                    </div>
+                                </shared-order-card>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </mat-tab>
+        }
+    </mat-tab-group>
+}

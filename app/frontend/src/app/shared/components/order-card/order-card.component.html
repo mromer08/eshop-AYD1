@@ -1,0 +1,46 @@
+<mat-card class="h-100 rounded-4 p-4 d-flex flex-column">
+    <div class="text-center mb-3">
+        <mat-icon [color]="returnColor()">{{ returnIcon() }}</mat-icon>
+    </div>
+    <span class="text-start">
+        <span class="fw-bold">Id de Orden: </span>
+        {{ order._id }}
+    </span>
+    <span class="text-start mb-3">
+        <span class="fw-bold">Fecha de Orden: </span>
+        {{ order.date }}
+    </span>
+    <span class="text-start mb-3">
+        <span class="fw-bold">Nombre del Cliente: </span>
+        {{ order.user.name }} {{ order.user.lastname }}
+    </span>
+    <span class="text-center fw-bold fs-3 mb-3">Detalles</span>
+    <div class="row">
+        <span class="col-4 text-start fw-bold">Producto</span>
+        <span class="col-4 text-start fw-bold">Precio</span>
+        <span class="col-4 text-end fw-bold">Cantidad</span>
+        @for (product of order.products; track $index) {
+            <span class="col-4 text-start">• {{ product.product.name }}</span>
+            <span class="col-4 text-start">{{ product.product.price | currency: 'Q' }}</span>
+            <span class="col-4 text-end">{{ product.quantity }}</span>
+        }
+    </div>
+    <mat-divider class="my-2"/>
+    <div class="row">
+        <span class="col-6 text-start fw-bold">SubTotal:</span>
+        <span class="col-6 text-end">{{ order.subtotal | currency: 'Q' }}</span>
+    </div>
+    <div class="row">
+        <span class="col-6 text-start fw-bold">Costo de Envio:</span>
+        <span class="col-6 text-end">{{ order.shipping_cost | currency: 'Q' }}</span>
+    </div>
+    <mat-divider class="my-2"/>
+    <div class="row">
+        <span class="col-6 text-start fw-bold">Total:</span>
+        <span class="col-6 text-end fw-bold">{{ order.total | currency: 'Q' }}</span>
+    </div>
+    <mat-divider class="my-3"/>
+    <div class="d-flex justify-content-center mt-auto">
+        <ng-content select="[status]"/>
+    </div>
+</mat-card>

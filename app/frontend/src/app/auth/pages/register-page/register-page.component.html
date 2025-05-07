@@ -1,0 +1,60 @@
+<div class="d-flex flex-column h-100">
+    <div class="text-center mt-5 mb-1">
+        <h1 class="fw-bold">Registrate</h1>
+    </div>
+    <mat-stepper linear="true">
+        <mat-step label="Datos" state="profile" [stepControl]="profileForm">
+            <form class="row gx-3 mt-2" [formGroup]="profileForm">
+                <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" placeholder="Nick" formControlName="name">
+                </mat-form-field>
+                <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput type="text" placeholder="Soto" formControlName="lastname">
+                </mat-form-field>
+                <div class="col-6">
+                    <shared-add-photo scale="1.25" (image)="catchImage($event)" />
+                </div>
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                    <button mat-fab outlinedIcon color="primary" matTooltip="Siguiente" matStepperNext [disabled]="!profileForm.valid">
+                        <mat-icon class="material-icons-outlined" >arrow_circle_right</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="Cuenta" state="account" [stepControl]="accountForm">
+            <form class="row gx-3 mt-2" [formGroup]="accountForm">
+                <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="text" placeholder="nick@example.com" formControlName="email">
+                </mat-form-field>
+                <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" placeholder="••••••••" formControlName="password">
+                </mat-form-field>
+                <mat-form-field class="col-12" appearance="outline">
+                    <mat-label>Confirma tu Contraseña</mat-label>
+                    <input matInput type="password" placeholder="••••••••" formControlName="c_password">
+                </mat-form-field>
+                <div class="col-12 d-flex justify-content-center align-items-center">
+                    <button mat-fab outlinedIcon color="accent" matTooltip="Regresar" matStepperPrevious class="me-2">
+                        <mat-icon class="material-icons-outlined">arrow_circle_left</mat-icon>
+                    </button>
+                    <button mat-fab outlinedIcon color="primary" matTooltip="Registrarme" class="ms-2" (click)="onRegister()" [disabled]="!accountForm.valid">
+                        <mat-icon class="material-icons-outlined">verified</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </mat-step>
+        <ng-template matStepperIcon="profile">
+            <mat-icon>account_circle</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="account">
+            <mat-icon>key</mat-icon>
+        </ng-template>
+    </mat-stepper>
+    <div class="mt-auto">
+        <auth-redirect type="register" />
+    </div>
+</div>

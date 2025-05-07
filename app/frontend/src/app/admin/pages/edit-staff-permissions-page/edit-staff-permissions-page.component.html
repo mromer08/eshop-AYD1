@@ -1,0 +1,26 @@
+<div class="row align-items-center">
+    <div class="col-md-4 col-sm-12 text-center mb-4">
+        <button mat-fab matTooltip="Regresar" routerLink="/admin/staff" outlinedIcon>
+            <mat-icon class="material-icons-outlined">arrow_circle_left</mat-icon>
+        </button>
+    </div>
+    <h1 class="col-md-4 col-sm-12 fw-bold text-center mb-2">Agregar Personal</h1>
+    <h3 class="col-md-4 col-sm-12 fw-bold text-center mb-2">Empleado: {{ user?.name }}</h3>
+</div>
+<div class="row align-items-center">
+    <div class="col-md-9 col-sm-12 p-1">
+        <admin-staff-permissions [permissionTypes]="permissionTypes" [userPermissions]="user?.permissions" (sendPermissions)="recibePermission($event)" />
+    </div>
+    <div class="col-md-3 col-sm-12 p-1">
+        <mat-card class="p-5 rounded-4 d-flex flex-column">
+            <button mat-fab extended outlinedIcon class="mx-auto my-3" (click)="onSave()">
+                <mat-icon class="material-icons-outlined">save_as</mat-icon>
+                Guardar
+            </button>
+            <button mat-fab extended color="warn" outlinedIcon class="mx-auto my-3" routerLink="/admin/staff">
+                <mat-icon class="material-icons-outlined">cancel</mat-icon>
+                Cancelar
+            </button>
+        </mat-card>
+    </div>
+</div>

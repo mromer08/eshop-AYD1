@@ -1,0 +1,109 @@
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="detalle; else divLoading" class="grid p-2">
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>{{ detalle.product.name | titlecase }}</mat-card-title>
+      <mat-card-subtitle
+        *ngIf="detalle.product.stock > 5; else pocasUnidades"
+        style="color: green"
+        >Disponible</mat-card-subtitle
+      >
+      <ng-template #pocasUnidades>
+        <mat-card-subtitle style="color: red">Pocas unidades</mat-card-subtitle>
+      </ng-template>
+      <mat-card-subtitle> {{detalle.product.stock }} disponibles</mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+      mat-card-image
+      [src]="detalle.product | productImage"
+      [alt]="detalle.product.name"
+    />
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>Información</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        <strong>Precio</strong>
+        {{ detalle.product.price | currency : "GTQ" : "symbol-narrow" }}
+        <br />
+        <strong>Unidades Adquiridas</strong> {{ detalle.quantity }}
+        {{ detalle.quantity | i18nPlural : agregadosMap }}
+        <br />
+        <strong>Subtotal</strong>
+        {{ detalle.sub_total | currency : "GTQ" : "symbol-narrow" }}
+        <br />
+        <mat-chip-listbox>
+          <mat-chip>
+            <mat-chip *ngFor="let categorie of detalle.product.categories">
+              {{ categorie.name }}
+            </mat-chip>
+          </mat-chip>
+        </mat-chip-listbox>
+      </p>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <div class="grid">
+
+        <div class="container">
+          <div class="flex justify-content-between">
+            <form
+              [formGroup]="miFormulario"
+              autocomplete="off"
+              (ngSubmit)="modificarPrecio()"
+              class="formgrid grid"
+            >
+              <mat-form-field>
+                <mat-label>Qty</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  required
+                  formControlName="existenciaLlevar"
+                  min="1"
+                  class="input-small"
+                  [max]="detalle.product.stock"
+                />
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+
+        <div class="flex justify-content-between">
+          <button
+            mat-button
+            mat-raised
+            color="primary"
+            type="submit"
+            (click)="modificarPrecio()"
+            [disabled]="miFormulario.invalid"
+          >
+            <mat-icon mat-icon>add_shopping_cart</mat-icon>
+            Mod.
+          </button>
+        </div>
+
+        <div class="flex justify-content-between">
+          <button mat-button mat-raised color="primary" (click)="delete()">
+            <mat-icon mat-icon>delete</mat-icon>
+            Del.
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

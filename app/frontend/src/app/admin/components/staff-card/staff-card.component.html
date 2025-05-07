@@ -1,0 +1,28 @@
+<mat-card class="h-100 p-3 d-flex flex-column">
+    <mat-card-header class="mx-auto">
+        <mat-card-title>
+            {{ staff.name }} - {{ staff.lastname }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ staff.email }}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="img_url" alt="Profile Picture" class="img-fluid my-4 mx-auto" style="width: 200px;" >
+    <mat-card-content class="mb-4">
+        <div class="disabled row">
+            @for (permission of staff.permissions; track $index) {
+                <h3 class="col-12">{{ permission.permissionType.name }}</h3>
+                @for (action of permission.actions; track $index) {
+                    <mat-checkbox class="col-md-6 col-sm-12" [checked]="true">{{ returnAction(action) }}</mat-checkbox>
+                }
+            }
+        </div>
+    </mat-card-content>
+    <mat-divider class="mb-3 mt-auto" />
+    <mat-card-actions>
+        <button mat-fab extended outlinedIcon class="mx-auto" (click)="onEditPermissions(staff._id)">
+            <mat-icon class="material-icons-outlined">supervised_user_circle</mat-icon>
+            Editar Permisos
+        </button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,9 @@
+.background-container {
+    background-image: url('../../../../../public/404-fondo.svg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}

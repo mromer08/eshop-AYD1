@@ -1,0 +1,22 @@
+<mat-toolbar [color]="color" style="height: 125px;">
+    <div class="w-100 h-100">
+        <div class="row h-100">
+            <div class="col-3 d-flex justify-content-center h-100">
+                <img [src]="logo_url" [alt]="name">
+            </div>
+            <div class="col-6 d-flex flex-column">
+                <!-- search-component -->
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <ng-content select="[options]" />
+                </div>
+            </div>
+            <div class="col-3 d-flex flex-column">
+                <tool-bar-options class="d-flex justify-content-center align-items-center h-50"/>
+                <div class="d-flex justify-content-center align-items-center h-50">
+                    <ng-content select="[sub-options]" />
+                    <shared-theme-switcher class="mx-1" />
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-toolbar>

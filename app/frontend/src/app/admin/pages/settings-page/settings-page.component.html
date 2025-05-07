@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3 col-sm-12">
+        <mat-card class="rounded-4 p-5">
+            <h1 class="fw-bold text-center mb-4">Configuracion de la Tienda</h1>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 p-2">
+                    <shared-add-photo scale="2" (image)="catchImage($event)" [url]="image" />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <form class="row gy-0 gx-3" [formGroup]="settingsForm" (ngSubmit)="updateSettings()">
+                        <mat-form-field appearance="outline" class="col-md-6 col-sm-12 p-2">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput type="text" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-md-6 col-sm-12 p-2">
+                            <mat-label>NIT</mat-label>
+                            <input matInput type="text" formControlName="nit">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>Dirección</mat-label>
+                            <input matInput type="text" formControlName="address">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-md-8 offset-md-2 col-sm-12 p-2">
+                            <mat-label>Numero de Telefono</mat-label>
+                            <input matInput type="text" formControlName="phone_number">
+                        </mat-form-field>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button mat-fab extended outlinedIcon type="submit">
+                                <mat-icon class="material-icons-outlined">save</mat-icon>
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

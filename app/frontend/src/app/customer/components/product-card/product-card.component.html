@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ product.name | titlecase }}</mat-card-title>
+    <mat-card-subtitle *ngIf="product.stock > 5; else pocasUnidades" style="color: green">Disponible</mat-card-subtitle>
+    <ng-template #pocasUnidades>
+      <mat-card-subtitle style="color: red">Pocas unidades</mat-card-subtitle>
+    </ng-template>
+  </mat-card-header>
+
+  <img mat-card-image [src]="product | productImage" [alt]="product.name">
+
+  <mat-card-content class="mt-2">
+    <h4><strong>Fecha Publicación:</strong> {{ product.created_at | date: 'shortDate' }}</h4>
+    <p>
+      <strong>Precio</strong> {{ product.price | currency: 'GTQ': 'symbol-narrow' }}
+      <br>
+      <strong>Stock</strong> {{ product.stock }} Unidades
+      <br>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let categorie of product.categories">
+          {{ categorie.name }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+
+  <mat-card-actions>
+
+    <div class="grid">
+      <div class="col-1"></div>
+
+      <div class="col-3">
+          <form [formGroup]="miFormulario"
+                autocomplete="off"
+                (ngSubmit)="agregar()"
+                class="formgrid grid">
+
+            <mat-form-field>
+              <mat-label>Qty</mat-label>
+              <input matInput
+                     type="number"
+                     required
+                     formControlName="existenciaLlevar"
+                     min="1"
+                     [max]="product.stock">
+            </mat-form-field>
+
+          </form>
+        </div>
+
+      <div class="col-8">
+        <div class="flex justify-content-between">
+          <button mat-button
+                  mat-raised
+                  color="primary"
+                  type="submit"
+                  (click)="agregar()"
+                  [disabled]="miFormulario.invalid">
+            <mat-icon mat-icon>add_shopping_cart</mat-icon>
+              Agregar
+          </button>
+          <span class="spacer"></span>
+          <button mat-button
+                  [routerLink]="['/customer/product', product._id]"
+                  mat-raised>
+            <mat-icon>more_horiz</mat-icon>
+              Más
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-actions>
+
+</mat-card>

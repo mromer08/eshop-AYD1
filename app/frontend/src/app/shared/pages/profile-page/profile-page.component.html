@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row d-flex align-items-stretch">
+        <mat-card class="col-md-5 offset-md-1 col-sm-12 p-5 rounded-4">
+            <h1 class="fw-bold text-center mb-4">Datos Personales</h1>
+            <div class="row mb-5">
+                <shared-add-photo class="col-md-6 col-sm-12" scale="1.5" [url]="url" (image)="catchImage($event)" />
+                <form class="row col-md-6 col-sm-12 my-auto mx-auto" [formGroup]="userForm">
+                    <mat-form-field appearance="outline" class="col-12 mt-4">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" placeholder="Nick" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-12">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput type="text" placeholder="Nick" formControlName="lastname">
+                    </mat-form-field>
+                    @if (NIT) {
+                        <mat-form-field appearance="outline" class="col-12">
+                            <mat-label>NIT</mat-label>
+                            <input matInput type="text" placeholder="5717948-2" formControlName="nit">
+                        </mat-form-field>
+                    }
+                </form>
+            </div>
+            <button mat-fab extended outlinedIcon class="mx-auto" (click)="updateUser()">
+                <mat-icon class="material-icons-outlined">change_circle</mat-icon>
+                Actualizar Datos
+            </button>
+        </mat-card>
+        <mat-card class="col-md-4 offset-md-1 col-sm-12 p-5 rounded-4">
+            <h1 class="fw-bold text-center mb-4">Cambiar Contraseña</h1>
+            <form class="row col-md-6 col-sm-12 my-auto w-100 mx-auto" [formGroup]="pswdForm">
+                <mat-form-field appearance="outline" class="col-12">
+                    <mat-label>Nueva Contraseña</mat-label>
+                    <input matInput type="password" placeholder="••••••••" formControlName="new_password">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-12">
+                    <mat-label>Confirmar Contraseña</mat-label>
+                    <input matInput type="password" placeholder="••••••••" formControlName="c_password">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-12">
+                    <mat-label>Contraseña Actual</mat-label>
+                    <input matInput type="password" placeholder="••••••••" formControlName="current_password">
+                </mat-form-field>
+            </form>
+            <button mat-fab extended outlinedIcon class="mt-auto mx-auto" (click)="updatePswd()">
+                <mat-icon class="material-icons-outlined">lock</mat-icon>
+                Actualizar Contraseña
+            </button>
+        </mat-card>
+    </div>
+</div>

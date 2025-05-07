@@ -1,0 +1,17 @@
+<mat-card class="rounded-4 p-5">
+    <h3 class="text-center pb-4">Permisos</h3>
+    <div class="row align-items-stretch">
+        @for (permissionType of permissionTypes; track $index) {
+            <div class="col-md-4 col-sm-12 p-1">
+                <mat-card class="rounded-4 d-flex flex-column p-3 shadow h-100">
+                    <h6 class="mx-auto">{{ permissionType.name }}</h6>
+                    <div class="row my-auto">
+                        @for (action of permissionType.available_actions; track $index) {
+                            <mat-checkbox class="col-6" [checked]="hasElement(permissionType._id, action)" (change)="setPermissions($event, permissionType._id, action)">{{ returnAction(action) }}</mat-checkbox>
+                        }
+                    </div>
+                </mat-card>
+            </div>
+        }
+    </div>
+</mat-card>

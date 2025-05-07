@@ -1,0 +1,29 @@
+<div class="d-flex flex-column mb-4">
+    <h1 class="fw-bold text-center mb-4">Productos</h1>
+    <button mat-fab extended outlinedIcon class="mx-auto" routerLink="/admin/add-product">
+        <mat-icon class="material-icons-outlined">add_to_photos</mat-icon>
+        Agregar Producto
+    </button>
+</div>
+<div class="row align-items-stretch overflow-auto" style="height: 400px;">
+    @for (product of products; track $index) {
+        <div class="col-md-3 col-sm-12 p-1">
+            <product-card [product]="product" >
+                <div actions>
+                    <button mat-mini-fab color="primary" outlinedIcon matTooltip="Editar" class="me-2" [routerLink]="returnLink(product._id)">
+                        <mat-icon class="material-icons-outlined">edit_square</mat-icon>
+                    </button>
+                    <!-- @if (product.availability) {
+                        <button mat-mini-fab outlinedIcon matTooltip="Dar de Baja" class="ms-2" color="warn" (click)="deleteProduct(product._id)">
+                            <mat-icon class="material-icons-outlined">auto_delete</mat-icon>
+                        </button>
+                    } @else if (!product.availability && product.stock !== 0) {
+                        <button mat-mini-fab outlinedIcon matTooltip="Disponible" class="ms-2" (click)="updateProduct(product._id)">
+                            <mat-icon class="material-icons-outlined">assistant_navigation</mat-icon>
+                        </button>
+                    } -->
+                </div>
+            </product-card>
+        </div>
+    }
+</div>

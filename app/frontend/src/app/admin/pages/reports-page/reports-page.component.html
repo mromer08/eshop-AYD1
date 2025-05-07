@@ -1,0 +1,46 @@
+<h1 class="fw-bold text-center mb-4">Reportes</h1>
+<div class="row overflow-auto">
+    <div class="col-md-8 col-sm-12 offset-md-2">
+        <mat-card class="p-5 rounded-4 d-flex flex-column">
+            <div class="row">
+                <div class="col-md-6 col-sm-12 my-5">
+                    <div class="mx-auto">
+                        <h3 class="my-3">Top 5 Productos Más Vendidos</h3>
+                        <ngx-charts-advanced-pie-chart [results]="topSellingProducts" />
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 my-5">
+                    <div class="mx-auto">
+                        <h3 class="my-3">Top 5 Usuarios Más Activos</h3>
+                        <ngx-charts-bar-horizontal [results]="topCustomers" [legend]="true" [legendPosition]="lp"
+                        [yAxis]="true" [xAxis]="true" legendTitle="Usuarios"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 my-5">
+                    <div class="mx-auto">
+                        <h3 class="my-3">Top 5 Usuarios Que Más Gastaron</h3>
+                        <ngx-charts-pie-grid [results]="topSpending" />
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 my-5">
+                    <div class="mx-auto">
+                        <h3 class="my-3">Top Metodos de Envio Favoritos</h3>
+                        <ngx-charts-advanced-pie-chart [results]="topShipping" />
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 my-5">
+                    <div class="mx-auto">
+                        <h3 class="my-3">Top Metodos de Pago Preferidos</h3>
+                        <ngx-charts-bar-horizontal [results]="topPayment" [legend]="true" [legendPosition]="lp"
+                        [yAxis]="true" [xAxis]="true" legendTitle="Metodos de Pago"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 my-5"></div>
+                <div class="mx-auto">
+                    <h3 class="my-3">Conteo de Ordenes por Estado</h3>
+                    <ngx-charts-pie-grid [results]="topStatus" />
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

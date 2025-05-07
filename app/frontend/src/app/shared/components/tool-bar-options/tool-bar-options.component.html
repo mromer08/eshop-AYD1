@@ -1,0 +1,23 @@
+@if (isAuth()) {
+    <button mat-button class="me-2" (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        Cerrar Sesión
+    </button>
+    <button mat-icon-button outlinedIcon matTooltip="Mi Cuenta" [ngClass]="{'p-0': photo}" (click)="redirectToMyAccount()">
+        @if (!photo) {
+            <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+        } @else {
+            <img [src]="photo" alt="Profile Picture" class="w-100 h-100 image-fluid rounded-circle">
+        }
+    </button>
+
+} @else {
+    <button mat-button class="me-2" (click)="redirect('login')">
+        <mat-icon>login</mat-icon>
+        Iniciar Sesión
+    </button>
+    <button mat-button class="ms-2" (click)="redirect('register')">
+        <mat-icon>edit_square</mat-icon>
+        Registrate
+    </button>
+}

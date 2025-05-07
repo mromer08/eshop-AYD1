@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.min.css">
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="over" position="end" style="width: 325px;">
+        <customer-shopping-cart [sidenav]="sidenav" />
+    </mat-sidenav>
+    <customer-tool-bar [sidenav]="sidenav" />
+    <div class="p-5">
+        <router-outlet/>
+    </div>  
+</mat-sidenav-container>

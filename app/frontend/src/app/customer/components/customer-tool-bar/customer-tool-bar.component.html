@@ -1,0 +1,14 @@
+<shared-tool-bar>
+    <div options class="h-100">
+        <ul class="d-flex justify-content-around m-0 p-0 list-unstyled h-100">
+            <li class="m-0 h-100">
+                <a mat-button routerLink="/customer/list" class="h-100">Productos</a>
+            </li>
+        </ul>
+    </div>
+    <div sub-options>
+        <button class="mx-2" mat-icon-button outlinedIcon matTooltip="Carrito" (click)="sidenav.toggle()">
+            <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
+        </button>
+    </div>
+</shared-tool-bar>

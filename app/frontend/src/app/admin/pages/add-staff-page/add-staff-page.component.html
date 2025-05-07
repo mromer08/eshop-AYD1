@@ -1,0 +1,57 @@
+<div class="row mb-3">
+    <div class="col-md-4 col-sm-12 text-center mb-3">
+        <button mat-fab matTooltip="Regresar" routerLink="/admin/staff" outlinedIcon>
+            <mat-icon class="material-icons-outlined">arrow_circle_left</mat-icon>
+        </button>
+    </div>
+    <h1 class="col-md-4 col-sm-12 fw-bold text-center mb-4">Agregar Personal</h1>
+    <div class="col-md-4 col-sm-12 d-flex justify-content-center align-items-center">
+        <label class="me-4">Tipo:</label>
+        <mat-radio-group class="d-flex flex-column" (change)="onRoleChange($event)" [value]="assistantValue">
+            <mat-radio-button [value]="adminValue" color="primary">Administrador</mat-radio-button>
+            <mat-radio-button [value]="assistantValue" color="primary">Asistente</mat-radio-button>
+        </mat-radio-group>
+    </div>
+</div>
+<div class="row align-items-stretch">
+    <div class="col-md-9 col-sm-12 p-1" [ngClass]="{'disabled': willBeAdmin}">
+        <admin-staff-permissions [permissionTypes]="permissionTypes" (sendPermissions)="recibePermission($event)" />
+    </div>
+    <div class="col-md-3 col-sm-12 p-1">
+        <form class="h-100" [formGroup]="staffForm">
+            <mat-card class="rounded-4 p-5 h-100">
+                <div class="my-auto">
+                    <h3 class="text-center pb-4">Datos</h3>
+                    <div class="row gx-3 gy-0">
+                        <mat-form-field appearance="outline" class="col-6">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput type="text" placeholder="Nick" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-6">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput type="text" placeholder="Gutierrez" formControlName="lastname">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-6">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="text" placeholder="nick@example.com" formControlName="email">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-6">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput type="password" placeholder="••••••••" formControlName="password">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-10 offset-1">
+                            <mat-label>Confirmar Contraseña</mat-label>
+                            <input matInput type="password" placeholder="••••••••" formControlName="c_password">
+                        </mat-form-field>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button mat-fab extended outlinedIcon (click)="onCreateStaff()">
+                                <mat-icon class="material-icons-outlined">group_add</mat-icon>
+                                Crear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </form>
+    </div>
+</div>
